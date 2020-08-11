@@ -78,7 +78,8 @@ let pads = {
                             value.lastEdited = resultObject.lastEdited;
                             resultObject = api.padUsersCount(value.padName);
                             value.userCount = resultObject.padUsersCount;
-                        }));
+                        })
+                        .catch((e) => console.log("Error retrieving last edited value: ", e)));
             });
         } else {
             data.message = 'No results';
