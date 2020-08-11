@@ -1,17 +1,17 @@
 {
-    "parts": [
-        {
-            "name": "ep_adminpads2",
-            "hooks": {
-                "expressCreateServer" : "ep_adminpads2/index:registerRoute",
-                "socketio" : "ep_adminpads2/index:socketio",
-                "padRemove" : "ep_adminpads2/index:updatePads",
-                "padCreate" : "ep_adminpads2/index:updatePads",
-                "eejsBlock_adminMenu" : "ep_adminpads2/index:eejsBlock_adminMenu"
-            },
-            "client_hooks" : {
-                "documentReady" : "ep_adminpads2/static/js/admin/pads:documentReady"
-            }
-        }
-    ]
+  "parts": [
+    {
+      "name": "ep_adminpads3",
+      "hooks": {
+        "expressCreateServer": "ep_adminpads3/index:registerRoute",
+        "socketio": "ep_adminpads3/index:socketio",
+        "padRemove": "ep_adminpads3/index:updatePads",
+        "padCreate": "ep_adminpads3/index:updatePads",
+        "eejsBlock_adminMenu": "ep_adminpads3/index:eejsBlock_adminMenu"
+      },
+      "client_hooks": {
+        "documentReady": "ep_adminpads3/static/js/admin/pads:documentReady"
+      }
+    }
+  ]
 }
