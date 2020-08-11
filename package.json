@@ -1,6 +1,6 @@
 {
   "name": "ep_adminpads3",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Etherpad plugin to list and delete pads in /admin.",
   "homepage": "https://github.com/RpNation/ep_adminpads3",
   "bugs": {
