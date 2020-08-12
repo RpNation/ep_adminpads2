@@ -19,6 +19,7 @@ const isInt = function (input) {
 };
 
 const formatDate = function (longtime) {
+    console.log('settings: ', settings);
     console.log('format DateUS: ', formatDateUS);
     var formattedDate = "";
     if (longtime != null && isInt(longtime)) {
