@@ -1,4 +1,4 @@
-exports.documentReady = function(hooks, context, cb) {
+exports.documentReady = function (hooks, context, cb) {
     if (context !== "admin/pads") {
         return cb;
     }
@@ -17,7 +17,7 @@ exports.documentReady = function(hooks, context, cb) {
     var changeTimer;
 
     //connect
-    socket = io.connect(room, {path: baseURL + "socket.io", resource: resource});
+    socket = io.connect(room, { path: baseURL + "socket.io", resource: resource });
 
     $(".search-results").data("query", {
         pattern: "",
@@ -44,24 +44,6 @@ exports.documentReady = function(hooks, context, cb) {
         query.pattern = $("#search-query")[0].value;
         query.offset = 0;
         search();
-    };
-
-    var isInt = function (input) {
-        return typeof input === "number" && input % 1 === 0;
-    };
-
-    var formatDate = function (longtime) {
-        var formattedDate = "";
-        if (longtime != null && isInt(longtime)) {
-            var date = new Date(longtime);
-            var month = date.getMonth() + 1;
-            formattedDate = date.getFullYear() + "-" + fillZeros(month) + "-" + fillZeros(date.getDate()) + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds());
-        }
-        return formattedDate;
-    };
-
-    var fillZeros = function (fillForm) {
-        return isInt(fillForm) ? (fillForm < 10 ? "0" + fillForm : fillForm) : "";
     };
 
     function updateHandlers() {
@@ -144,7 +126,7 @@ exports.documentReady = function(hooks, context, cb) {
     socket.on("search-result", function (data) {
         var widget = $(".search-results")
             , limit = data.query.offset + data.query.limit
-        ;
+            ;
         if (limit > data.total) {
             limit = data.total;
         }
@@ -166,9 +148,9 @@ exports.documentReady = function(hooks, context, cb) {
                 var userCount = resultset.userCount;
                 var row = widget.find(".template tr").clone();
                 row.find(".padname").html("<a href=\"../p/" + encodeURIComponent(padName) + "\">" + htmlEntities(padName) + "</a>"
-            )
-                ;
-                row.find(".last-edited").html(formatDate(lastEdited));
+                )
+                    ;
+                row.find(".last-edited").html(lastEdited);
                 row.find(".user-count").html(userCount);
                 resultList.append(row);
             });
