@@ -1,10 +1,10 @@
 const eejs = require('ep_etherpad-lite/node/eejs');
 const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
-var settings = require('ep_etherpad-lite/node/utils/Settings');
+const settings = require('ep_etherpad-lite/node/utils/Settings');
 
-var pluginSettings = settings.ep_adminpads3;
-var formatDateUS = pluginSettings.formatDateUS || false;
+const pluginSettings = settings.ep_adminpads3;
+const formatDateUS = (pluginSettings && pluginSettings.formatDateUS) || false;
 const queryLimit = 12;
 
 RegExp.quote = function (x) {
