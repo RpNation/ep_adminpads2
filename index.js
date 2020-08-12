@@ -19,8 +19,6 @@ const isInt = function (input) {
 };
 
 const formatDate = function (longtime) {
-    console.log('settings: ', settings);
-    console.log('format DateUS: ', formatDateUS);
     var formattedDate = "";
     if (longtime != null && isInt(longtime)) {
         var date = new Date(longtime);
@@ -29,7 +27,6 @@ const formatDate = function (longtime) {
             ? fillZeros(month) + "-" + fillZeros(date.getDate()) + "-" + date.getFullYear() + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds())
             : date.getFullYear() + "-" + fillZeros(month) + "-" + fillZeros(date.getDate()) + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds());
     }
-    console.log('formatted date: ', formattedDate);
     return formattedDate;
 };
 
