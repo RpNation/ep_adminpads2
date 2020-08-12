@@ -147,9 +147,7 @@ exports.documentReady = function (hooks, context, cb) {
                 var lastEdited = resultset.lastEdited;
                 var userCount = resultset.userCount;
                 var row = widget.find(".template tr").clone();
-                row.find(".padname").html("<a href=\"../p/" + encodeURIComponent(padName) + "\">" + htmlEntities(padName) + "</a>"
-                )
-                    ;
+                row.find(".padname").html("<a href=\"../p/" + encodeURIComponent(padName) + "\">" + htmlEntities(padName) + "</a>");
                 row.find(".last-edited").html(lastEdited);
                 row.find(".user-count").html(userCount);
                 resultList.append(row);
