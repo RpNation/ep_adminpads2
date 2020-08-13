@@ -1,6 +1,10 @@
 const eejs = require('ep_etherpad-lite/node/eejs');
 const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
+const settings = require('ep_etherpad-lite/node/utils/Settings');
+
+const pluginSettings = settings.ep_adminpads3;
+const formatDateUS = (pluginSettings && pluginSettings.formatDateUS) || false;
 const queryLimit = 12;
 
 RegExp.quote = function (x) {
@@ -8,6 +12,26 @@ RegExp.quote = function (x) {
 };
 const isNumeric = function (arg) {
     return typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
+};
+
+const isInt = function (input) {
+    return typeof input === "number" && input % 1 === 0;
+};
+
+const formatDate = function (longtime) {
+    var formattedDate = "";
+    if (longtime != null && isInt(longtime)) {
+        var date = new Date(longtime);
+        var month = date.getMonth() + 1;
+        formattedDate = formatDateUS
+            ? fillZeros(month) + "-" + fillZeros(date.getDate()) + "-" + date.getFullYear() + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds())
+            : date.getFullYear() + "-" + fillZeros(month) + "-" + fillZeros(date.getDate()) + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds());
+    }
+    return formattedDate;
+};
+
+const fillZeros = function (fillForm) {
+    return isInt(fillForm) ? (fillForm < 10 ? "0" + fillForm : fillForm) : "";
 };
 
 let pads = {
@@ -75,7 +99,7 @@ let pads = {
                 getEdited.push(
                     api.getLastEdited(value.padName)
                         .then((resultObject) => {
-                            value.lastEdited = resultObject.lastEdited;
+                            value.lastEdited = formatDate(resultObject.lastEdited);
                             resultObject = api.padUsersCount(value.padName);
                             value.userCount = resultObject.padUsersCount;
                         })
