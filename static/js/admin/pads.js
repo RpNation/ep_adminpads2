@@ -46,6 +46,24 @@ exports.documentReady = function (hooks, context, cb) {
         search();
     };
 
+    var isInt = function (input) {
+        return typeof input === "number" && input % 1 === 0;
+    };
+
+    var formatDate = function (longtime) {
+        var formattedDate = "";
+        if (longtime != null && isInt(longtime)) {
+            var date = new Date(longtime);
+            var month = date.getMonth() + 1;
+            formattedDate = date.getFullYear() + "-" + fillZeros(month) + "-" + fillZeros(date.getDate()) + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds());
+        }
+        return formattedDate;
+    };
+
+    var fillZeros = function (fillForm) {
+        return isInt(fillForm) ? (fillForm < 10 ? "0" + fillForm : fillForm) : "";
+    };
+
     function updateHandlers() {
         $("#progress.dialog .close").off("click").click(function () {
             $("#progress.dialog").hide();
@@ -148,7 +166,7 @@ exports.documentReady = function (hooks, context, cb) {
                 var userCount = resultset.userCount;
                 var row = widget.find(".template tr").clone();
                 row.find(".padname").html("<a href=\"../p/" + encodeURIComponent(padName) + "\">" + htmlEntities(padName) + "</a>");
-                row.find(".last-edited").html(lastEdited);
+                row.find(".last-edited").html(formatDate(lastEdited));
                 row.find(".user-count").html(userCount);
                 resultList.append(row);
             });
